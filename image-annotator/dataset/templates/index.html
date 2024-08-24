@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Layout</title>
+    <link rel="stylesheet" href="{{ ASSETS_ROOT }}/css/style.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .sidebar {
+        background-color: #f4f4f4;
+        width: 200px;
+        padding: 15px;
+        height: 100vh;
+      }
+
+      .sidebar nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar nav ul li {
+        margin-bottom: 10px;
+      }
+
+      .sidebar nav ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+
+      .content h2 {
+        margin-top: 0;
+      }
+
+      .form-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px; /* Increased gap to add more space between columns */
+      }
+
+      .form-column {
+        flex: 1;
+        min-width: 200px;
+        max-width: 300px; /* Limits the width of each column */
+      }
+
+      .form-column label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-column input,
+      .form-column select,
+      .form-column textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .form-column .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-actions {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .form-actions a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 14px; /* Smaller font size for the link */
+        transition: color 0.3s ease;
+      }
+
+      .form-actions a:hover {
+        color: #0056b3;
+      }
+
+      .form-actions button {
+        padding: 6px 12px; /* Smaller padding for the button */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px; /* Smaller font size for the button */
+        transition: background-color 0.3s ease;
+      }
+
+      .form-actions button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Trisakti</h1>
+    </header>
+
+    <div class="container">
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li><a href="/">Dataset Creator</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <h2>Create Dataset Profile</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-container">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="id_profil_dataset">ID Profile Dataset</label>
+                {{ form.id_profil_dataset }}
+              </div>
+              <div class="form-group">
+                <label for="nama_dataset">Nama Dataset</label>
+                {{ form.nama_dataset }}
+              </div>
+              <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                {{ form.deskripsi }}
+              </div>
+            </div>
+
+            <div class="form-column">
+              <div class="form-group">
+                <label for="tanggal_buat">Tanggal Buat</label>
+                {{ form.tanggal_buat }}
+              </div>
+              <div class="form-group">
+                <label for="type_data">Type Data</label>
+                {{ form.type_data }}
+              </div>
+              <div class="form-group">
+                <label for="configuration">Configurasi</label>
+                {{ form.configuration }}
+                <button name="viewconfig">View Config</buttons>
+              </div>
+              <div class="form-actions">
+                <button name ="submit" type="submit">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

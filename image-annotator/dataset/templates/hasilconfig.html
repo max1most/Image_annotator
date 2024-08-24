@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dataset Creator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        max-width: 1000px;
+        margin-bottom: 20px;
+      }
+
+      .header img {
+        width: 50px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .dataset-profile {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 80%;
+        max-width: 1000px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+      }
+
+      .dataset-profile .profile-info {
+        width: 50%;
+        margin-right: 20px;
+      }
+
+      .dataset-profile .profile-info label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .dataset-profile .profile-info input,
+      .dataset-profile .profile-info textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      .dataset-profile .profile-image {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dataset-profile .profile-image img {
+        width: 100%;
+        max-width: 200px;
+        border-radius: 8px;
+      }
+
+      .configuration-detail {
+        width: 80%;
+        max-width: 1000px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .configuration-detail .detail-section {
+        margin-bottom: 20px;
+      }
+
+      .configuration-detail .detail-section label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .configuration-detail .detail-section p {
+        margin: 0;
+      }
+
+      .method-split-dataset {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        width: 80%;
+        max-width: 1000px;
+      }
+
+      .split-section {
+        width: 30%;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+      }
+
+      .split-section h3 {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+
+      .split-section p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .split-section .progress {
+        width: 100%;
+        height: 10px;
+        background-color: #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .split-section .progress-bar {
+        height: 100%;
+        background-color: #4caf50;
+        border-radius: 4px;
+      }
+
+      /* Custom background colors for each section */
+      .training-section {
+        background-color: #ff7043; /* Orange */
+      }
+
+      .validation-section {
+        background-color: #42a5f5; /* Blue */
+      }
+
+      .testing-section {
+        background-color: #66bb6a; /* Green */
+      }
+
+      .preprocessing-dataset {
+        width: 80%;
+        max-width: 1000px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .preprocessing-dataset .dataset-options {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .preprocessing-dataset .dataset-options .column {
+        width: 48%;
+      }
+
+      .preprocessing-dataset .dataset-options .column label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .preprocessing-dataset .dataset-options .column .option {
+        margin-bottom: 10px;
+      }
+
+      .preprocessing-dataset
+        .dataset-options
+        .column
+        .option
+        input[type="checkbox"] {
+        margin-right: 5px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        width: 80%;
+        max-width: 1000px;
+      }
+
+      .buttons button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4caf50;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      .buttons button:hover {
+        background-color: #45a049;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        width: 80%;
+        max-width: 1000px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+      }
+
+      .footer .footer-info {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+      }
+
+      .footer .footer-info img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+
+      .footer .footer-info p {
+        margin: 0;
+        margin-left: 10px;
+      }
+
+      .footer .footer-links {
+        display: flex;
+        align-items: center;
+      }
+
+      .footer .footer-links a {
+        margin-left: 10px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .footer .footer-links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Dataset Creator</h1>
+      </div>
+      {% for in konfigurasi_items%}
+      <table class="table table-dataset-profile" id="">
+        {% if %}
+        
+          <label for="dataset-description">Deskripsi:</label>
+          <textrea id="dataset-description" readonly>
+Kumpulan data image yang menampilkan sapi dan lingkungannya.</textarea
+          >
+          <label for="dataset-type">Data Type:</label>
+          <input type="text" id="dataset-type" value="Image" readonly />
+          <label for="dataset-date">Date:</label>
+          <input type="text" id="dataset-date" value="20 June 2024" readonly />
+        </div>
+        <div class="profile-image"></div>
+      </div>
+      <div class="configuration-detail">
+        <h3>CONFIGURATION DETAIL</h3>
+        <p>Generated on 2024-05-01 10:32 am</p>
+        <div class="detail-section">
+          <label for="image-origin">Image Origin:</label>
+          <p id="image-origin">
+            Job_annotasi_image_sapi<br />Job_anotasi_image_kandang
+          </p>
+        </div>
+      </div>
+      <div class="method-split-dataset">
+        <div class="split-section training-section">
+          <h3>Training Test</h3>
+          <p>75 Images</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: 60%"></div>
+          </div>
+        </div>
+        <div class="split-section validation-section">
+          <h3>Validation Test</h3>
+          <p>45 Images</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: 30%"></div>
+          </div>
+        </div>
+        <div class="split-section testing-section">
+          <h3>Testing Test</h3>
+          <p>30 Images</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: 20%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="preprocessing-dataset">
+        <h3>Preprocessing Dataset</h3>
+        <div class="dataset-options">
+          <div class="column">
+            <div class="option">
+              <input type="checkbox" id="auto-orient" checked disabled />
+              <label for="auto-orient">Auto-orient: applied</label>
+            </div>
+            <div class="option">
+              <input type="checkbox" id="resize" checked disabled />
+              <label for="resize">Resize: Stretch to 500 x 500</label>
+            </div>
+          </div>
+          <div class="column">
+            <div class="option">
+              <input type="checkbox" id="contrast" checked disabled />
+              <label for="contrast">Contrast: applied</label>
+            </div>
+            <!-- Add more options as needed -->
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="back-button">
+          <a href="/metodeconfig/{{item.id_konfigurasi}}">Back</a>
+        </button>
+        <button class="finish-button">
+          <a href="/viewhasil/{{item.id_konfigurasi}}">Finish</a>
+        </button>
+      </div>
+      <div class="footer">
+        <div class="footer-info">
+          <p>username</p>
+        </div>
+        <div class="footer-links">
+          <a href="#">email or mobile phone</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

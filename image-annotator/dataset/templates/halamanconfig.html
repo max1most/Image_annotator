@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frame 45</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        width: auto;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .section {
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+      }
+
+      .select-field {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 8l4-4 4 4z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+      }
+
+      .button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #0069d9;
+      }
+
+      .method-button {
+        width: 48%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 2%;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .method-button.active {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      .preprocessing-columns {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .preprocessing-column {
+        flex: 1;
+      }
+
+      .preprocessing-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .preprocessing-label {
+        font-weight: bold;
+      }
+
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-right: 10px;
+      }
+
+      .checkbox:checked {
+        background-color: #007bff;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .close-button:hover {
+        background-color: #eee;
+      }
+
+      .close-button:before,
+      .close-button:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 2px;
+        background-color: #333;
+      }
+
+      .close-button:before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .close-button:after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="close-button"></button>
+      <div class="section">
+        <div class="section-title">Title Configuration</div>
+        <input
+          type="text"
+          class="input-field"
+          value="{{konfigurasi_items.id_konfigurasi}}"
+        />
+      </div>
+
+      <!-- Source Images Section -->
+      <div class="section">
+        <div class="section-title">Source Images</div>
+        <select class="select-field">
+          <option value="{{konfigurasi_items.image_origin}}">
+            {{konfigurasi_items.image_origin}}
+          </option>
+          <option value="">Select Job List</option>
+          <option value="option1">Job_annotator_kucing</option>
+          <option value="option2">Job_annotator_sapi</option>
+        </select>
+        <button class="button">Add Source Images</button>
+      </div>
+
+      <!-- New Select Job Class Section -->
+      <div class="section">
+        <div class="section-title">Job Class</div>
+        <select class="select-field">
+          <option value="{{konfigurasi_items.class_origin}}">
+            {{konfigurasi_items.class_origin}}
+          </option>
+          <option value="">Select Job Class</option>
+          <option value="class1">Class_A</option>
+          <option value="class2">Class_B</option>
+        </select>
+        <button class="button">Select Class Image</button>
+      </div>
+
+      <!-- Method Section -->
+      <div class="section">
+        <div class="section-title">Method</div>
+        <button class="method-button active">Imbalance</button>
+        <button class="method-button">Balance</button>
+      </div>
+
+      <!-- Preprocessing Section -->
+      <div class="section">
+        <div class="section-title">Preprocessing</div>
+        <div class="preprocessing-columns">
+          <div class="preprocessing-column">
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Otomatis</div>
+              <input type="checkbox" class="checkbox" checked />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Resize</div>
+              <input type="checkbox" class="checkbox" checked />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Contrast</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Exposure</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Auto-Orient</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+          </div>
+
+          <div class="preprocessing-column">
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Shadow</div>
+              <input type="checkbox" class="checkbox" checked />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Shades</div>
+              <input type="checkbox" class="checkbox" checked />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Brilliance</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Vignette</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+            <div class="preprocessing-item">
+              <div class="preprocessing-label">Appeal</div>
+              <input type="checkbox" class="checkbox" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="/metodeconfig">
+        <button class="button">Save</button>
+      </a>
+    </div>
+    <script>
+      const methodButtons = document.querySelectorAll(".method-button");
+      methodButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          methodButtons.forEach((b) => b.classList.remove("active"));
+          button.classList.add("active");
+        });
+      });
+
+      const closeButton = document.querySelector(".close-button");
+      closeButton.addEventListener("click", () => {
+        window.close();
+      });
+    </script>
+  </body>
+</html>

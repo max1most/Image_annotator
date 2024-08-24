@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metode Pengambilan</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .method-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .method-button {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #eee;
+      }
+
+      .method-button.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .radio-button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .custom-ratio {
+        display: none;
+      }
+
+      .ratio-input-group {
+        margin-bottom: 10px;
+      }
+
+      .ratio-input {
+        width: 50px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .ratio-label {
+        margin-left: 10px;
+      }
+
+      .save-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .save-button:hover {
+        background-color: #0056b3;
+      }
+
+      .save-button a {
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Metode Pengambilan</h2>
+      <div class="method-buttons">
+        <button class="method-button active" id="kronologis">Kronologis</button>
+        <button class="method-button" id="random">Random</button>
+      </div>
+
+      <h2>Ratio Split</h2>
+      <div class="radio-group">
+        <div class="radio-button">
+          <input type="radio" name="ratio" id="default" checked />
+          <label for="default">Default</label>
+        </div>
+        <div class="radio-button">
+          <input type="radio" name="ratio" id="custom" />
+          <label for="custom">Custom</label>
+        </div>
+      </div>
+
+      <div class="custom-ratio">
+        <div class="ratio-input-group">
+          <label for="train-test">Train Test</label>
+          <input type="number" class="ratio-input" id="train-test" value="80" />
+          <span class="ratio-label">%</span>
+        </div>
+        <div class="ratio-input-group">
+          <label for="valid-test">Validation Test</label>
+          <input type="number" class="ratio-input" id="valid-test" value="10" />
+          <span class="ratio-label">%</span>
+        </div>
+        <div class="ratio-input-group">
+          <label for="testing-test">Testing Test</label>
+          <input
+            type="number"
+            class="ratio-input"
+            id="testing-test"
+            value="10"
+          />
+          <span class="ratio-label">%</span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="save-button">
+          <a href="/hasilconfig/{{item.id_konfigurasi}}">Save</a>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const methodButtons = document.querySelectorAll(".method-button");
+      const ratioRadios = document.querySelectorAll('input[name="ratio"]');
+      const customRatio = document.querySelector(".custom-ratio");
+
+      methodButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          methodButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+        });
+      });
+
+      ratioRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (radio.id === "custom") {
+            customRatio.style.display = "block";
+          } else {
+            customRatio.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
